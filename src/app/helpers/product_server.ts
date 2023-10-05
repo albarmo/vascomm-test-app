@@ -1,11 +1,11 @@
 import axios, { AxiosError } from 'axios';
 
 export const fetchProductList = async (params: { limit:string, status:boolean,offset:number, keyword:string}) => {
-    const queryString = new URLSearchParams(params).toString();
-    console.log(queryString)
+    // const queryString = new URLSearchParams(params).toString();
+    // console.log(queryString)
     
     try {
-        const response = await axios.get(`/api/product?${queryString}`);
+        const response = await axios.get(`/api/product?keyword=${params.keyword}`);
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;

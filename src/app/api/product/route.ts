@@ -12,7 +12,7 @@ export async function GET(req: Request, res: NextApiResponse) {
     try {
         const response = await axios.request({
             method: 'GET',
-            url: `${apiUrl}/products?keyword=${keyword}`,
+            url: `${apiUrl}/products`,
         });
         return Response.json({ ...response?.data }, { status: 200 })
     } catch (error) {

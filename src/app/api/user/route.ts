@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 const apiUrl = process.env.apiUrl;
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request, res: Response) {
     const token = cookies().get('token')?.value
     if (!token) {
         return Response.json({ code: '401', message: 'You are unauthorized' }, { status: 401 })

@@ -4,7 +4,6 @@ import CarouselSlider from '../components/Slider'
 import ProductCard from '../components/cards/ProductCard'
 import { fetchProductList } from '../helpers/product_server';
 import useCustomQuery from '../utils/hooks/useCustomQuery';
-import useWindowDimensions from '../utils/hooks/useDimension';
 
 const BANNER_DATA = [
   { id: '01', title: 'Slide 1', imageSrc: '/assets/images/banner.png' },
@@ -14,8 +13,6 @@ const BANNER_DATA = [
 
 
 export default function Home() {
-  const { width } = useWindowDimensions();
-
   const { data: productLatest } = useCustomQuery(
     'latestProduct',
     { limit: 10, offset: 0 },
@@ -28,14 +25,18 @@ export default function Home() {
         <div className='my-5'>
           <CarouselSlider data={BANNER_DATA} spaceBetween={10} slidesPerView={1} type='banner' />
         </div>
-        <div className='my-10'>
+        <div className='hidden md:block my-10'>
           <h2 className='font-semibold text-lg'>Terbaru</h2>
-          <CarouselSlider data={productLatest?.data} spaceBetween={10} slidesPerView={width <= 640 ? 2 : 5} type='list-card' />
+          <CarouselSlider data={productLatest?.data} spaceBetween={10} slidesPerView={5} type='list-card' />
+        </div>
+        <div className='block md:hidden my-10'>
+          <h2 className='font-semibold text-lg'>Terbaru</h2>
+          <CarouselSlider data={productLatest?.data} spaceBetween={10} slidesPerView={2} type='list-card' />
         </div>
         <div className='my-10'>
           <h2 className='font-semibold text-lg'>Produk Tersedia</h2>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 my-5'>
-            {productLatest?.data.map((product: Product) =>
+            {productLatest?.data?.map((product: Product) =>
               <ProductCard
                 key={product.id}
                 data={product}
