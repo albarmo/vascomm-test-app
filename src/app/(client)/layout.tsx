@@ -1,17 +1,15 @@
-import './globals.css'
+import '../globals.css'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Playfair_Display } from 'next/font/google'
+import Navbar from '../components/layout/navigation/Navbar'
+import Footer from '../components/layout/Footer'
 
+const playfair = Playfair_Display({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Vascomm - Albar',
   description: 'Cilent application untuk test bidang Vascomm',
 }
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ["100", '200', '300', '400', '500', '600', '700', '800']
-})
 
 export default function RootLayout({
   children,
@@ -20,9 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={playfair.className}>
+        <Navbar />
         {children}
       </body>
+      <Footer />
     </html>
   )
 }
