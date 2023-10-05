@@ -3,13 +3,12 @@
 import React from 'react'
 import Image from 'next/image';
 
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { currencyFormat } from '../utils/initial';
 import ProductCard from './cards/ProductCard';
 
 interface IPropsCarouselSlider {
@@ -39,10 +38,8 @@ const CarouselSlider: React.FC<IPropsCarouselSlider> = ({ data, spaceBetween, sl
             spaceBetween={spaceBetween}
             slidesPerView={slidesPerView}
             pagination={{ clickable: true }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log('slide change')}
         >
-            {data.map((item) =>
+            {data?.map((item) =>
                 <SwiperSlide key={item.id} className='bg-gray-100'>
                     <RenderSliderItem data={item} type={type} />
                 </SwiperSlide>

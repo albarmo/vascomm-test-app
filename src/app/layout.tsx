@@ -1,12 +1,8 @@
+'use client'
 import './globals.css'
-import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-
-
-export const metadata: Metadata = {
-  title: 'Vascomm - Albar',
-  description: 'Cilent application untuk test bidang Vascomm',
-}
+import { Toaster } from 'react-hot-toast';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -18,11 +14,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const queryClient = new QueryClient();
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {children}
+        <QueryClientProvider client={queryClient}>
+          <Toaster />
+          {children}
+        </QueryClientProvider>
       </body>
     </html>
   )
 }
+

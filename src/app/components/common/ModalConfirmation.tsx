@@ -24,8 +24,8 @@ const ModalConfirmation: React.FC<IModalProps> = ({ title, description, isOpen, 
                         <center className='-mt-5'>
                             <div className='bg-red-500 w-12 h-12 flex justify-center items-center rounded-full'>
                                 <svg width="24" height="30" viewBox="0 0 44 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M14.5417 27.0834H28.8751C35.8017 27.0834 41.4167 21.4683 41.4167 14.5417C41.4167 7.61514 35.8017 2.00005 28.8751 2.00005H14.5417C7.61518 2.00005 2.00008 7.61514 2.00008 14.5417C2.00008 21.4683 7.61518 27.0834 14.5417 27.0834Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M28.8777 9.16736C25.9092 9.16736 23.5027 11.5738 23.5027 14.5424C23.5027 17.5109 25.9092 19.9174 28.8777 19.9174C31.8462 19.9174 34.2527 17.5109 34.2527 14.5424C34.2527 11.5738 31.8462 9.16736 28.8777 9.16736Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M14.5417 27.0834H28.8751C35.8017 27.0834 41.4167 21.4683 41.4167 14.5417C41.4167 7.61514 35.8017 2.00005 28.8751 2.00005H14.5417C7.61518 2.00005 2.00008 7.61514 2.00008 14.5417C2.00008 21.4683 7.61518 27.0834 14.5417 27.0834Z" stroke="white" stroke-width="4" strokeLinecap="round" stroke-linejoin="round" />
+                                    <path d="M28.8777 9.16736C25.9092 9.16736 23.5027 11.5738 23.5027 14.5424C23.5027 17.5109 25.9092 19.9174 28.8777 19.9174C31.8462 19.9174 34.2527 17.5109 34.2527 14.5424C34.2527 11.5738 31.8462 9.16736 28.8777 9.16736Z" stroke="white" stroke-width="4" strokeLinecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
                         </center>

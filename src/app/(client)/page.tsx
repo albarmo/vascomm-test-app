@@ -2,6 +2,8 @@
 
 import CarouselSlider from '../components/Slider'
 import ProductCard from '../components/cards/ProductCard'
+import { fetchLatestProduct } from '../helpers/user_server';
+import useCustomQuery from '../utils/hooks/useCustomQuery';
 import useWindowDimensions from '../utils/hooks/useDimension';
 
 const BANNER_DATA = [
@@ -10,17 +12,15 @@ const BANNER_DATA = [
   { id: '03', title: 'Slide 3', imageSrc: '/assets/images/banner.png' }
 ]
 
-const PRODUCT_DATA: Product[] = [
-  { id: '01', title: 'Euodia', price: 200000, imageSrc: '/assets/images/product-1.png' },
-  { id: '02', title: 'Euodia', price: 200000, imageSrc: '/assets/images/product-2.png' },
-  { id: '03', title: 'Euodia', price: 200000, imageSrc: '/assets/images/product-2.png' },
-  { id: '04', title: 'Euodia', price: 200000, imageSrc: '/assets/images/product-2.png' },
-  { id: '05', title: 'Euodia', price: 200000, imageSrc: '/assets/images/product-2.png' },
-  { id: '06', title: 'Euodia', price: 200000, imageSrc: '/assets/images/product-2.png' },
-]
 
 export default function Home() {
   const { width } = useWindowDimensions();
+
+  const { data: productLatest } = useCustomQuery(
+    'latestProduct',
+    { limit: 10, offset: 0 },
+    fetchLatestProduct
+  );
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start space-y-6 mt-[100px]">
@@ -30,12 +30,12 @@ export default function Home() {
         </div>
         <div className='my-10'>
           <h2 className='font-semibold text-lg'>Terbaru</h2>
-          <CarouselSlider data={PRODUCT_DATA} spaceBetween={10} slidesPerView={width <= 640 ? 2 : 5} type='list-card' />
+          <CarouselSlider data={productLatest?.data} spaceBetween={10} slidesPerView={width <= 640 ? 2 : 5} type='list-card' />
         </div>
         <div className='my-10'>
           <h2 className='font-semibold text-lg'>Produk Tersedia</h2>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 my-5'>
-            {PRODUCT_DATA.map((product: Product) =>
+            {productLatest?.data.map((product: Product) =>
               <ProductCard
                 key={product.id}
                 data={product}

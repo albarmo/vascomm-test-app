@@ -13,10 +13,14 @@ export default function useWindowDimensions() {
 
     useLayoutEffect(() => {
         function handleResize() {
-            setWindowDimensions(getWindowDimensions());
+            if (window) {
+                setWindowDimensions(getWindowDimensions());
+            }
         }
 
-        window.addEventListener('resize', handleResize);
+        if (window) {
+            window.addEventListener('resize', handleResize);
+        }
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
