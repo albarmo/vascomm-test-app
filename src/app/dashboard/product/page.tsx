@@ -26,7 +26,7 @@ const ProductManagementPage = () => {
                     <h1 className='text-lg font-light'>
                         Manajemen Produk
                     </h1>
-                    <button onClick={() => open()} className='font-sans px-4 py-1 bg-primary  uppercase text-white border-blackrounded-xs'>
+                    <button onClick={() => open(null)} className='font-sans px-4 py-1 bg-primary  uppercase text-white border-blackrounded-xs'>
                         Tambah Produk
                     </button>
                 </section>

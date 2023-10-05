@@ -2,7 +2,7 @@
 
 import CarouselSlider from '../components/Slider'
 import ProductCard from '../components/cards/ProductCard'
-import { fetchLatestProduct } from '../helpers/user_server';
+import { fetchProductList } from '../helpers/product_server';
 import useCustomQuery from '../utils/hooks/useCustomQuery';
 import useWindowDimensions from '../utils/hooks/useDimension';
 
@@ -19,7 +19,7 @@ export default function Home() {
   const { data: productLatest } = useCustomQuery(
     'latestProduct',
     { limit: 10, offset: 0 },
-    fetchLatestProduct
+    fetchProductList
   );
 
   return (

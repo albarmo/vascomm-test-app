@@ -1,4 +1,7 @@
 'use client'
+import { deleteUser } from '@/app/helpers/user_server'
+import useCustomMutation from '@/app/utils/hooks/useCustomMutation'
+import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 interface IModalProps {
@@ -6,12 +9,29 @@ interface IModalProps {
     description?: string
     isOpen: boolean
     close: () => void
+    data: any
 }
-const ModalConfirmation: React.FC<IModalProps> = ({ title, description, isOpen, close }) => {
+const ModalConfirmation: React.FC<IModalProps> = ({ title, description, isOpen, close, data: userValue }) => {
+    const router = useRouter()
     useEffect(() => {
         document.body.style.overflow = 'unset';
         document.body.style.overflow = 'hidden';
     }, [])
+
+    const { mutation } =
+        useCustomMutation(deleteUser);
+
+    const handleConfrim = async () => {
+        if (!userValue?.id) return
+        try {
+            const resp = await mutation.mutateAsync(userValue?.id);
+            if (resp.status === 200) {
+                router.push('/dashboard/user')
+            }
+        } catch (error) {
+            console.error('An error occurred while submitting the form:', error);
+        }
+    }
 
     return (
         <div className={`${!isOpen && 'hidden'} fixed top-0 left-0 w-screen h-screen bg-gray-500 bg-opacity-60 z-50 flex items-center overflow-hidden`}>
@@ -34,14 +54,14 @@ const ModalConfirmation: React.FC<IModalProps> = ({ title, description, isOpen, 
                         <div className="p-8">
                             <div className="text-center -mt-5 my-5">
                                 <h1 className="block text-lg font-bold text-gray-800">{title}</h1>
-                                <p>{description}</p>
+                                <p>Apakah kamu yakin menghapus “{userValue?.name}”?</p>
                             </div>
                         </div>
                         <div className="p-3 px-8 flex justify-end space-x-3">
                             <button onClick={() => close()} className='rounded px-4 text-sm py-1 border-[1px] border-gray-200 text-gray-400'>
                                 Batal
                             </button>
-                            <button className='rounded px-4 text-sm py-1 bg-primary   text-white'>
+                            <button onClick={() => handleConfrim()} className='rounded px-4 text-sm py-1 bg-primary   text-white'>
                                 Hapus
                             </button>
                         </div>

@@ -1,8 +1,8 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { getCookie, getCookies } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import { logoutAccount } from '@/app/helpers/logout';
 import useCustomMutation from '@/app/utils/hooks/useCustomMutation';
 
@@ -26,6 +26,21 @@ const Navbar = () => {
         router.refresh()
     }
 
+
+    const [keyword, setKeyword] = useState('');
+    const handleChange = (event: any) => {
+        setKeyword(event.target.value);
+    };
+
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            router.push(`/search?keyword=${keyword}`)
+        }
+    };
+
+    console.log(keyword)
+
+
     return (
         <nav className='fixed top-0 z-50 w-full h-16 bg-white border-b border-[#E4E4E4] px-10 flex justify-between items-center'>
             <Image src={'/assets/branding/logo.svg'} alt='vascomm' width={168} height={100} />
@@ -38,7 +53,14 @@ const Navbar = () => {
                         </svg>
                     </button>
                 </span>
-                <input type='text' placeholder='Cari parfum kesukaanmu' className='bg-low-grey text-gray-600 rounded px-4 w-full h-8 text-sm' />
+                <input
+                    value={keyword}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                    type='text'
+                    placeholder='Cari parfum kesukaanmu'
+                    className='bg-low-grey text-gray-600 rounded px-4 w-full h-8 text-sm'
+                />
             </div>
             {token ?
                 <section className='flex space-x-4'>
@@ -51,7 +73,7 @@ const Navbar = () => {
                     <button onClick={() => router.push('/auth')} className='font-sans font-semibold px-4 py-1 border-[1px] border-primary uppercase text-primary border-blackrounded-xs'>
                         Masuk
                     </button>
-                    <button className='font-sans font-semibold px-4 py-1 bg-primary  uppercase text-white border-blackrounded-xs'>
+                    <button onClick={() => router.push('/register')} className='font-sans font-semibold px-4 py-1 bg-primary  uppercase text-white border-blackrounded-xs'>
                         Daftar
                     </button>
                 </section >}
