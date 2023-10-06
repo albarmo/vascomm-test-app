@@ -18,7 +18,7 @@ const ProductManagementPage = () => {
 
     const { data: products, refetch } = useCustomQuery(
         'fetchProductList',
-        { limit: 10, offset: 0 },
+        { limit: 10, offset: 0, keyword: '' },
         fetchProductList
     );
 

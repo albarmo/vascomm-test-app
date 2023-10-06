@@ -62,7 +62,6 @@ const ProductEditForm: React.FC<IPropsEditProduk> = ({ data: productValue }) => 
     return (
         <section className='w-full bg-white'>
             <div className='text-left leading-6 font-sans p-5'>
-                {JSON.stringify(productValue)}
                 <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-1 gap-y-2 py-5 text-gray-600'>
                     <label htmlFor='title'>Nama Produk</label>
                     <input id='title' defaultValue={productValue?.title} {...register("title")} type='text' placeholder='Isi nama' className='border border-gray-500 rounded-sm h-10 w-full p-2' />

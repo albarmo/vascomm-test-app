@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile } from 'fs/promises'
-
 import axios from 'axios';
 import { cookies } from 'next/headers';
-import { FormEvent } from 'react'
-import { createReadStream } from 'fs';
-import { Readable } from 'stream';
-
 
 const apiUrl = process.env.apiUrl;
 export async function GET(req: Request, res: NextResponse) {
@@ -14,12 +8,11 @@ export async function GET(req: Request, res: NextResponse) {
     const keyword = url.searchParams.get("keyword")
     const limit = url.searchParams.get("limit")
     const offset = url.searchParams.get("offset")
-    const status = url.searchParams.get("status")
 
     try {
         const response = await axios.request({
             method: 'GET',
-            url: `${apiUrl}/products`,
+            url: `${apiUrl}/products?offset=${offset}&limit=${limit}&keyword=${keyword}`,
         });
         return Response.json({ ...response?.data }, { status: 200 })
     } catch (error) {

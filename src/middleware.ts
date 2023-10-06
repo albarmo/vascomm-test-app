@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
     let access_token: any = request.cookies.get('token')?.value
 
     const USER_DATA = jwtDecode(access_token)
-    console.log(USER_DATA)
+    console.info(USER_DATA)
     
     if (USER_DATA?.role !== 'admin' && pathname === '/dashboard') {
          return NextResponse.redirect(

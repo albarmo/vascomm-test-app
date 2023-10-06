@@ -1,11 +1,10 @@
 import axios, { AxiosError } from 'axios';
 
 export const fetchProductList = async (params: { limit: string, status: boolean, offset: number, keyword: string }) => {
-    // const queryString = new URLSearchParams(params).toString();
-    // console.log(queryString)
+    const queryString = new URLSearchParams(params as any).toString();
 
     try {
-        const response = await axios.get(`/api/product?keyword=${params.keyword}`);
+        const response = await axios.get(`/api/product?${queryString}`);
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;
@@ -13,6 +12,7 @@ export const fetchProductList = async (params: { limit: string, status: boolean,
         return responseData;
     }
 };
+
 
 export const createProduct = async (payload: { title: string, price: number, image: File | any, status: boolean }) => {
     let formData = new FormData();
@@ -33,7 +33,6 @@ export const createProduct = async (payload: { title: string, price: number, ima
         });
         return response;
     } catch (error) {
-        console.log(error,'middle')
         const axiosError = error as AxiosError;
         const responseData = axiosError.response?.data;
         return responseData;
@@ -59,7 +58,6 @@ export const updateProduct = async (payload: {id :string, title: string, price: 
         });
         return response;
     } catch (error) {
-        console.log(error,'middle')
         const axiosError = error as AxiosError;
         const responseData = axiosError.response?.data;
         return responseData;
@@ -67,7 +65,6 @@ export const updateProduct = async (payload: {id :string, title: string, price: 
 };
 
 export const deleteProduct = async (id: string) => {
-    console.log(id)
     try {
         const response = await axios.delete(`/api/product?id=${id}`);
         return response;

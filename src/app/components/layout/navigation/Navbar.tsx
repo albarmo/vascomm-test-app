@@ -38,12 +38,9 @@ const Navbar = () => {
         }
     };
 
-    (keyword)
-
-
     return (
         <nav className='fixed top-0 z-50 w-full h-16 bg-white border-b border-[#E4E4E4] px-10 flex justify-between items-center'>
-            <Image src={'/assets/branding/logo.svg'} alt='vascomm' width={168} height={100} />
+            <Image onClick={() => router.push('/')} src={'/assets/branding/logo.svg'} alt='vascomm' width={168} height={100} className='cursor-pointer' />
             <div className="relative text-gray-600 focus-within:text-gray-400 w-2/5 hidden md:flex">
                 <span className="absolute inset-y-0 right-2 flex items-center pl-2">
                     <button type="submit" className="p-1 focus:outline-none focus:shadow-outline">
@@ -58,7 +55,7 @@ const Navbar = () => {
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                     type='text'
-                    placeholder='Cari parfum kesukaanmu'
+                    placeholder='Tekan enter untuk melakukan pencarian'
                     className='bg-low-grey text-gray-600 rounded px-4 w-full h-8 text-sm'
                 />
             </div>

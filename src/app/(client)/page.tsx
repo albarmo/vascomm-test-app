@@ -15,7 +15,7 @@ const BANNER_DATA = [
 export default function Home() {
   const { data: productLatest } = useCustomQuery(
     'latestProduct',
-    { limit: 10, offset: 0 },
+    { limit: 10, offset: 0, keyword: '' },
     fetchProductList
   );
 
