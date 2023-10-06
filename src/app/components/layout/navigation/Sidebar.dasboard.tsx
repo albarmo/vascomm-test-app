@@ -15,7 +15,7 @@ const Sidebar = () => {
     const router = useRouter()
 
     return (
-        <aside className='relative shadow-sm left-0 w-72 h-screen bg-white'>
+        <aside style={{ display: pathname === '/dashboard/auth' ? 'none' : '' }} className='relative shadow-sm left-0 w-72 h-screen bg-white'>
             <ul className='py-5 font-sans'>
                 {SidebarMenu.map((menu) =>
                     <li key={menu.id}

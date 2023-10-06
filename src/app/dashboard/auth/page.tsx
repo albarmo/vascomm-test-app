@@ -41,7 +41,7 @@ const AdminLoginPage = () => {
         }
     }
     return (
-        <div className='w-full h-screen flex flex-col md:flex-row justify-start md:justify-between bg-red-50'>
+        <div className='w-full h-screen flex flex-col md:flex-row justify-center md:justify-between bg-red-50'>
             <section className='w-full h-3/5 md:h-full md:w-2/4 flex justify-center items-center' style={{ backgroundImage: 'url(/assets/buble-bg.svg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
                 <div className='text-center w-4/5 leading-6 font-sans'>
                     <h1 className='text-4xl font-semibold uppercase'>

@@ -9,7 +9,6 @@ import useCustomQuery from '../../utils/hooks/useCustomQuery';
 export default function SearchPage() {
   const queryParam = useSearchParams()
   const keywordValue = queryParam.get('keyword')
-  console.log(keywordValue)
   const params = {
     limit: 10, offset: 0, keyword: keywordValue
   }

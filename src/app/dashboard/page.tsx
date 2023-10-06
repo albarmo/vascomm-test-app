@@ -1,4 +1,9 @@
+'use client'
+
 import React from 'react'
+import useCustomQuery from '../utils/hooks/useCustomQuery';
+import { fetchProductList } from '../helpers/product_server';
+import { currencyFormat } from '../utils/initial';
 
 const Dashboard = () => {
 
@@ -6,24 +11,35 @@ const Dashboard = () => {
         {
             id: 0,
             title: 'Jumlah User',
-            value: 150
+            value: 8,
+            prefix: 'user'
         },
         {
             id: 1,
             title: 'Jumlah User Aktif',
-            value: 150
+            value: 6,
+            prefix: 'user'
         },
         {
             id: 2,
             title: 'Jumlah Produk',
-            value: 150
+            value: 10,
+            prefix: 'item'
         },
         {
             id: 3,
             title: 'Jumlah Produk Aktif',
-            value: 150
+            value: 9,
+            prefix: 'item'
         },
     ]
+
+    const { data: products, refetch } = useCustomQuery(
+        'fetchProductList',
+        { limit: 10, offset: 0 },
+        fetchProductList
+    );
+
     return (
         <div className='w-full grid grid-cols-1 gap-y-5'>
             <h1 className='text-lg font-light'>
@@ -33,7 +49,7 @@ const Dashboard = () => {
                 {Insights.map((insight) =>
                     <article key={insight.id} className='gradient-1 h-28 px-5 flex flex-col justify-center items-start rounded-xl'>
                         <p className='text-sm font-light'>{insight.title}</p>
-                        <p><span className='text-2xl mr-1'>{insight.value}</span>User</p>
+                        <p><span className='text-2xl mr-1'>{insight.value}</span>{insight.prefix}</p>
                     </article>
                 )}
             </div>
@@ -55,40 +71,20 @@ const Dashboard = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="bg-white border-b ">
-                                <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap">
-                                    Apple MacBook Pro 17
-                                </th>
-                                <td className="px-6 py-4">
-                                    Silver
-                                </td>
+                            {products?.data?.map((product: any, index: number) =>
+                                <tr key={product?.id} className="bg-white border-b ">
+                                    <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap">
+                                        {product?.title}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {product?.createdAt}
+                                    </td>
 
-                                <td className="px-6 py-4">
-                                    $2999
-                                </td>
-                            </tr>
-                            <tr className="bg-white border-b ">
-                                <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap">
-                                    Microsoft Surface Pro
-                                </th>
-                                <td className="px-6 py-4">
-                                    White
-                                </td>
-                                <td className="px-6 py-4">
-                                    $1999
-                                </td>
-                            </tr>
-                            <tr className="bg-white">
-                                <th scope="row" className="px-6 py-4 font-medium  whitespace-nowrap">
-                                    Magic Mouse 2
-                                </th>
-                                <td className="px-6 py-4">
-                                    Black
-                                </td>
-                                <td className="px-6 py-4">
-                                    $99
-                                </td>
-                            </tr>
+                                    <td className="px-6 py-4">
+                                        {currencyFormat(product?.price)}
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

@@ -15,7 +15,7 @@ const UserManagementPage = () => {
     const { isOpen: isOpenedit, open: openEdit, close: closeEdit, data: editData } = useModalDisclosure()
     const { isOpen: isOpenView, open: openView, close: closeView, data: detailData } = useModalDisclosure()
 
-    const { data: users } = useCustomQuery(
+    const { data: users, refetch } = useCustomQuery(
         'latestProduct',
         { limit: 10, offset: 0 },
         fetchUserList
@@ -32,7 +32,23 @@ const UserManagementPage = () => {
                 <UserEditForm data={editData} />
             </Modal>
             <Modal title='Detail User' isOpen={isOpenView} close={closeView} >
-                {/* <UserRegisterForm data={detailData} /> */}
+                <ul>
+                    <li >
+                        ID : <span className='text-primary'>{detailData?.id}</span>
+                    </li>
+                    <li>
+                        Nama : {detailData?.name}
+                    </li>
+                    <li>
+                        Email : {detailData?.name}
+                    </li>
+                    <li>
+                        Phone : {detailData?.name}
+                    </li>
+                    <li>
+                        Role : {detailData?.role}
+                    </li>
+                </ul>
             </Modal>
             <div className='w-full grid grid-cols-1 gap-y-5'>
                 <section className='w-full flex justify-between '>

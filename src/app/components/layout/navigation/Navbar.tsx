@@ -38,7 +38,7 @@ const Navbar = () => {
         }
     };
 
-    console.log(keyword)
+    (keyword)
 
 
     return (
