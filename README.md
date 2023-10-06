@@ -1,5 +1,23 @@
 ## Getting Started
 
+## Default Seeding User Account:
+
+Admin 
+`
+{
+    "email": "admin@vascomm.id",
+    "password": "Vascomm2023!"
+}
+`
+
+Customer 
+`
+{
+    "email": "customer@vascomm.com",
+    "password": "Vascomm2023!"
+}
+`
+
 ## Routes Customer
 
 ```bash
