@@ -5,11 +5,13 @@ import { useRouter } from 'next/navigation'
 import { getCookie } from 'cookies-next';
 import { logoutAccount } from '@/app/helpers/logout';
 import useCustomMutation from '@/app/utils/hooks/useCustomMutation';
-import SigninButton from '../../ButtonSignIn';
+import { signOut } from "next-auth/react";
+import { useSession } from 'next-auth/react';
 
 
 const Navbar = () => {
     const router = useRouter()
+    const { data: session } = useSession();
     const token = getCookie('token');
 
     const { mutation: logout } =
@@ -19,7 +21,8 @@ const Navbar = () => {
         try {
             const resp = await logout.mutateAsync({});
             if (resp?.status === 200) {
-                router.push('/')
+                signOut()
+                router.refresh()
             }
         } catch (error) {
             console.error('An error occurred while logout account:', error);
@@ -60,8 +63,9 @@ const Navbar = () => {
                     className='bg-low-grey text-gray-600 rounded px-4 w-full h-8 text-sm'
                 />
             </div>
-            {token ?
-                <section className='flex space-x-4'>
+            {session || token ?
+                <section className='flex justify-center items-center space-x-5'>
+                    <p> {session?.user?.name}</p>
                     <button onClick={() => logoutHandler()} className='font-sans px-4 py-1 border-[1px] border-gray-100  text-gray-400 border-blackrounded-xs'>
                         Keluar
                     </button>
@@ -74,7 +78,8 @@ const Navbar = () => {
                     <button onClick={() => router.push('/register')} className='font-sans font-semibold px-4 py-1 bg-primary  uppercase text-white border-blackrounded-xs'>
                         Daftar
                     </button>
-                </section >}
+                </section >
+            }
         </nav >
     )
 }
