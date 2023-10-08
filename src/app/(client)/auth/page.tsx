@@ -8,6 +8,7 @@ import * as yup from "yup"
 import useCustomMutation from '@/app/utils/hooks/useCustomMutation';
 import { loginAccount } from '../../helpers/login';
 import { useRouter } from 'next/navigation';
+import SigninButton from '@/app/components/ButtonSignIn';
 
 type Inputs = {
     email: string,
@@ -62,6 +63,7 @@ const LoginPage = () => {
                             Masuk
                         </button>
                     </form>
+                    <SigninButton />
                 </div>
             </section>
         </div>

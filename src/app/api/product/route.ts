@@ -40,7 +40,6 @@ export async function POST(req: Request) {
             data: formData
         });
 
-        console.log({ response })
         return Response.json({ ...response?.data }, { status: 200 })
     } catch (error) {
         return Response.json({ error, req }, { status: 500 })
@@ -66,7 +65,6 @@ export async function PUT(req: Request) {
             data: formData
         });
 
-        console.log({ response })
         return Response.json({ ...response?.data }, { status: 200 })
     } catch (error) {
         return Response.json({ error, req }, { status: 500 })

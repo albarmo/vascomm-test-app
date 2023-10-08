@@ -3,6 +3,7 @@ import './globals.css'
 import { Poppins } from 'next/font/google'
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Providers from './components/Providers';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,7 +21,9 @@ export default function RootLayout({
       <body className={poppins.className}>
         <QueryClientProvider client={queryClient}>
           <Toaster />
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </QueryClientProvider>
       </body>
     </html>
